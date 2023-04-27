@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row text-center">
+    <div class="col-sm-6">
+        <div class="card border-0">
+            <div class="card-body">
+                <img src="https://static.vecteezy.com/system/resources/previews/010/666/584/non_2x/doctor-in-front-of-hospital-with-ambulance-vector.jpg" class="img-fluid rounded" width="250" height="250" />
+            </div>
+        </div>
+    </div>
+
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="col-sm-6">
+                <div class="card-body">
+                    <h5 class="card-title">Sign In</h5>
+                    <br />
+                    <div class="form-floating mb-3">
+                        <label asp-for="credential.UserName">Username</label>
+                        <input type ="text" asp-for="credential.UserName" /> 
+                        <span class="text-danger" asp-validation-for="credential.UserName"></span>
+                    </div>
+                    <div class="form-floating">
+                        <label asp-for="credential.Password">Password</label>
+                        <input type="password" asp-for="credential.Password" />
+                        <span class="text-danger" asp-validation-for="credential.Password"></span>
+
+                    </div>
+                    <br />
+
+                    <input type="submit" class="btn btn-primary" value="Login"></input>
+
+                </div>
+            </div>
+    </form>
+</div>
