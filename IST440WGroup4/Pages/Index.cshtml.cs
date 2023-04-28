@@ -21,7 +21,9 @@ namespace IST440WGroup4.Pages
         [BindProperty]
         public Credential credential { get; set; }
 
-        public List<LoginInfo> listLogins = new List<LoginInfo>();
+        public List<UserName> listUsername = new List<UserName>();
+
+        public List<Password> listPassword = new List<Password>();
 
         public void OnGet()
         {
@@ -38,11 +40,13 @@ namespace IST440WGroup4.Pages
                         {
                             while (reader.Read())
                             {
-                                LoginInfo loginInfo = new LoginInfo();
-                                loginInfo.loginID = "" + reader.GetInt32(0);
-                                loginInfo.password = reader.GetString(1);
-
-                                listLogins.Add(loginInfo);
+                                UserName userName = new UserName();
+                                userName.userName = "" + reader.GetInt32(0);
+                                listUsername.Add(userName);
+                                
+                                Password password = new Password();
+                                password.password = reader.GetString(1);
+                                listPassword.Add(password);
                             }
                         }
                     }
@@ -84,12 +88,16 @@ namespace IST440WGroup4.Pages
         public string Password { get; set; }
     }
 
-    public class LoginInfo
+    public class UserName
     {
         [Required]
-        public String loginID;
+        public String userName;
+       
+    }
+
+    public class Password
+    {
         [Required]
         public String password;
-
     }
 }
