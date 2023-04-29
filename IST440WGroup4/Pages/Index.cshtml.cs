@@ -5,7 +5,7 @@ using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Security.Claims;
-using static IST440WGroup4.Pages.Dashboard.IndexModel.Clinician;
+
 
 namespace IST440WGroup4.Pages
 {
@@ -21,61 +21,69 @@ namespace IST440WGroup4.Pages
         [BindProperty]
         public Credential credential { get; set; }
 
-        public List<UserName> listUsername = new List<UserName>();
+        public List<String> listUsername = new List<String>();
 
-        public List<Password> listPassword = new List<Password>();
+        public List<String> listPassword = new List<String>();
+
+
+        public String userName;
+
+        public String password;
+
 
         public void OnGet()
         {
-            try
-            {
-                String connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=GPHDatabase;Integrated Security=True";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    String sql = "SELECT * FROM Login";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                UserName userName = new UserName();
-                                userName.userName = "" + reader.GetInt32(0);
-                                listUsername.Add(userName);
-                                
-                                Password password = new Password();
-                                password.password = reader.GetString(1);
-                                listPassword.Add(password);
-                            }
-                        }
-                    }
-                }
-            }
-            catch { }
+               
+  
 
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) return Page();
 
-                if (credential.UserName == "2063" && credential.Password == "password") 
-                { 
-                    var claims = new List<Claim>
+            string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=GPHDatabase;Integrated Security=True";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sql = "SELECT * FROM Login";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        new Claim(ClaimTypes.Name, "2036")
+                        while (reader.Read())
+                        {
+                            userName = "" + reader.GetInt32(0);
+                            listUsername.Add(userName);
 
-                    };
-                    var identity = new ClaimsIdentity(claims, "MyCookieAuth");
-                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
 
-                    await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
+                            password = reader.GetString(1);
+                            listPassword.Add(password);
 
-                    return RedirectToPage("/Dashboard/Index");
+
+                        }
+                    }
+                }
             }
 
-            return Page();
+            if (listUsername.Contains(credential.UserName) && listPassword.Contains(credential.Password)) 
+            { 
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, "2036")
+
+                };
+                var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
+
+                return RedirectToPage("/Dashboard/Index");
+            }
+            else
+            {
+                return Page();
+            }
+
         }
     }
 
@@ -88,16 +96,5 @@ namespace IST440WGroup4.Pages
         public string Password { get; set; }
     }
 
-    public class UserName
-    {
-        [Required]
-        public String userName;
-       
-    }
 
-    public class Password
-    {
-        [Required]
-        public String password;
-    }
 }
