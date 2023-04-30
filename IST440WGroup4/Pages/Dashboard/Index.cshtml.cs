@@ -11,7 +11,6 @@ namespace IST440WGroup4.Pages.Dashboard
 
         public List<ClinicianInfo> listClinicians = new List<ClinicianInfo>();
         public List<PatientInfo> listPatients = new List<PatientInfo>();
-        public List<VitalInfo> listVitals = new List<VitalInfo>();
 
 
         public void OnGet()
@@ -86,23 +85,122 @@ namespace IST440WGroup4.Pages.Dashboard
                             {
                                 while (reader.Read())
                                 {
-                                    VitalInfo vitalInfo = new VitalInfo();
-                                    vitalInfo.vitalID = "" + reader.GetInt32(0);
-                                    vitalInfo.patientID = "" + reader.GetInt32(1);
-                                    vitalInfo.respiratoryRPM = "" + reader.GetInt32(2);
-                                    vitalInfo.heartRate = "" + reader.GetInt32(3);
-                                    vitalInfo.systolicBP = "" + reader.GetInt32(4);
+                                    PatientInfo vitalInfo = new PatientInfo();
+                                    vitalInfo.vitalID = reader.GetInt32(0);
+                                    vitalInfo.respiratoryRPM = reader.GetInt32(2);
+                                    vitalInfo.heartRate = reader.GetInt32(3);
+                                    vitalInfo.systolicBP = reader.GetInt32(4);
                                     vitalInfo.apvuScore = reader.GetString(5);
-                                    vitalInfo.temperature = "" + reader.GetInt32(6);
+                                    vitalInfo.temperature = reader.GetInt32(6);
                                     //vitalInfo.urine = reader.GetString(7);
 
-                                    listVitals.Add(vitalInfo);
+                                    listPatients.Add(vitalInfo);
+
+                                    
                                     
 
                                 }
                             }
                         }
                     }
+
+
+                    foreach(var vital in listPatients)
+                        {
+                            vital.mewsScore = 0;
+                            if (vital.respiratoryRPM <= 9)
+                            {
+                                vital.mewsScore += 2;
+                            }
+                            if (vital.respiratoryRPM <= 14 && vital.respiratoryRPM > 9)
+                            {
+                                vital.mewsScore += 0; 
+                            }
+                            if (vital.respiratoryRPM > 14 && vital.respiratoryRPM <= 20) 
+                            {
+                                vital.mewsScore += 1;
+                            }
+                            if (vital.respiratoryRPM > 20 && vital.respiratoryRPM <= 29) 
+                            {
+                                vital.mewsScore += 2; 
+                            }
+                            if (vital.respiratoryRPM > 29) 
+                            { 
+                                vital.mewsScore += 3; 
+                            }
+                            if (vital.heartRate <= 40)
+                            {
+                                vital.mewsScore += 2;
+                            }
+                            if (vital.heartRate > 40 && vital.heartRate < 50)
+                            {
+                                vital.mewsScore += 1;
+                            }
+                            if (vital.heartRate >= 50 && vital.heartRate < 100)
+                            {
+                                vital.mewsScore += 0;
+                            }
+                            if (vital.heartRate >= 100 && vital.heartRate < 110)
+                            {
+                                vital.mewsScore += 1;
+                            }
+                            if (vital.heartRate >= 110 && vital.heartRate < 130)
+                            {
+                                vital.mewsScore += 2;
+                            }
+                            if (vital.heartRate >= 130)
+                            {
+                                vital.mewsScore += 3;
+                            }
+                            if (vital.systolicBP <= 70)
+                            {
+                                vital.mewsScore += 3;
+                            }
+                            if (vital.systolicBP > 70 && vital.systolicBP <= 80)
+                            {
+                                vital.mewsScore += 2;
+                            }
+                            if (vital.systolicBP > 80 && vital.systolicBP <= 100)
+                            {
+                                vital.mewsScore += 2;
+                            }
+                            if (vital.systolicBP < 100 && vital.systolicBP < 200)
+                            {
+                                vital.mewsScore += 0;
+                            }
+                            if (vital.systolicBP >= 200)
+                            {
+                                vital.mewsScore += 2;
+                            }
+                            if (vital.apvuScore == "ALERT")
+                            {
+                                vital.mewsScore += 0;
+                            }
+                            if (vital.apvuScore == "PAIN")
+                            {
+                                vital.mewsScore += 2;
+                            }   
+                            if (vital.apvuScore == "VOICE")
+                            {
+                                vital.mewsScore += 1;
+                            }
+                            if (vital.apvuScore == "UNRESPONSIVE")
+                            {
+                                vital.mewsScore += 3;
+                            }
+                            if (vital.apvuScore == "AGITATED")
+                            {
+                                vital.mewsScore += 1;
+                            } 
+                            if (vital.temperature == 35)
+                            {
+                                vital.mewsScore += 0;
+                            }
+                            
+
+                            
+
+            }
 
         }
 
@@ -134,20 +232,18 @@ namespace IST440WGroup4.Pages.Dashboard
                 public String attendingClinicianID;
                 public String hospitalWing;
                 public String roomNumber;
-            }
-
-            public class VitalInfo {
-                public String vitalID;
-                public String patientID;
-                public String respiratoryRPM;
-                public String heartRate;
-                public String systolicBP;
+                public Int32 vitalID;
+                public Int32 respiratoryRPM;
+                public Int32 heartRate;
+                public Int32 systolicBP;
                 public String apvuScore;
-                public String temperature;
-                public String urine;
+                public Int32 temperature;
+                //public String urine;
+                public Int32 mewsScore;
 
             }
 
+          
 
     }
 

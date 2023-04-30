@@ -15,7 +15,6 @@
         </tr>
     </thead>
     <tbody>
-
         
         @foreach (var patient in Model.listPatients)
         {
@@ -23,9 +22,12 @@
                 <td>@patient.medicalRecordNumber</td>
                 <td>@patient.firstName</td>
                 <td>@patient.lastName</td>
+                <td>@patient.mewsScore </td>
+ 
             </tr>
         }
-        
+  
+
 
 
     </tbody>
