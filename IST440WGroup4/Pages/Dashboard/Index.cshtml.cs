@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace IST440WGroup4.Pages.Dashboard
 {
@@ -80,8 +81,111 @@ namespace IST440WGroup4.Pages.Dashboard
                 }
             }
 
-        
-        }
+            foreach (var patient in listPatients)
+            {
+                if (patient.respiratoryRPM <= 9)
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.respiratoryRPM <= 14 && patient.respiratoryRPM > 9)
+                {
+                    patient.mewsScore += 0;
+                }
+                else if (patient.respiratoryRPM > 14 && patient.respiratoryRPM <= 20)
+                {
+                    patient.mewsScore += 1;
+                }
+                else if (patient.respiratoryRPM > 20 && patient.respiratoryRPM <= 29)
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.respiratoryRPM > 29)
+                {
+                    patient.mewsScore += 3;
+                }
+                if (patient.heartRate <= 40)
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.heartRate > 40 && patient.heartRate < 50)
+                {
+                    patient.mewsScore += 1;
+                }
+                else if (patient.heartRate >= 50 && patient.heartRate < 100)
+                {
+                    patient.mewsScore += 0;
+                }
+                else if (patient.heartRate >= 100 && patient.heartRate < 110)
+                {
+                    patient.mewsScore += 1;
+                }
+                else if (patient.heartRate >= 110 && patient.heartRate < 130)
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.heartRate >= 130)
+                {
+                    patient.mewsScore += 3;
+                }
+                if (patient.systolicBP <= 70)
+                {
+                    patient.mewsScore += 3;
+                }
+                else if (patient.systolicBP > 70 && patient.systolicBP <= 80)
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.systolicBP > 80 && patient.systolicBP <= 100)
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.systolicBP < 100 && patient.systolicBP < 200)
+                {
+                    patient.mewsScore += 0;
+                }
+                else if (patient.systolicBP >= 200)
+                {
+                    patient.mewsScore += 2;
+                }
+                if (patient.apvuScore == "ALERT")
+                {
+                    patient.mewsScore += 0;
+                }
+                else if (patient.apvuScore == "PAIN")
+                {
+                    patient.mewsScore += 2;
+                }
+                else if (patient.apvuScore == "VOICE")
+                {
+                    patient.mewsScore += 1;
+                }
+                else if (patient.apvuScore == "UNRESPONSIVE")
+                {
+                    patient.mewsScore += 3;
+                }
+                else if (patient.apvuScore == "AGITATED")
+                {
+                    patient.mewsScore += 1;
+                }
+                if (patient.temperature == 35)
+                {
+                    patient.mewsScore += 0;
+                }
+                if (patient.mewsScore <= 1)
+                {
+                    patient.status = "Normal";
+                }
+                else if (patient.mewsScore > 1 && patient.mewsScore <= 4)
+                {
+                    patient.status = "Cautious";
+                }
+                else if (patient.mewsScore > 4)
+                {
+                    patient.status = "Urgent";
+                }
+
+                }
+            }
 
 
 
@@ -122,8 +226,7 @@ namespace IST440WGroup4.Pages.Dashboard
                 public String status;
 
             }
-
-
+           
           
 
     }
