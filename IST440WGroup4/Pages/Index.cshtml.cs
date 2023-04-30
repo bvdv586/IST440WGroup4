@@ -65,7 +65,7 @@ namespace IST440WGroup4.Pages
                 }
             }
 
-            if (listUsername?.Where(x => x.Contains(userName)).Any() == true && listPassword?.Where(x => x.Contains(password)).Any() == true) 
+            if (listUsername?.Where(x => x.Contains(credential.UserName)).Any() == true && listPassword?.Where(x => x.Contains(credential.Password)).Any() == true) 
             { 
                 var claims = new List<Claim>
                 {

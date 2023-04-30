@@ -1,7 +1,8 @@
+using Azure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data.SqlClient; 
+using System.Data.SqlClient;
 
 namespace IST440WGroup4.Pages.Dashboard
 {
@@ -14,7 +15,8 @@ namespace IST440WGroup4.Pages.Dashboard
 
 
         public void OnGet()
-            {
+            {       
+
                     string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=GPHDatabase;Integrated Security=True";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
