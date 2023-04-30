@@ -107,7 +107,6 @@ namespace IST440WGroup4.Pages.Dashboard
 
                     foreach(var vital in listPatients)
                         {
-                            vital.mewsScore = 0;
                             if (vital.respiratoryRPM <= 9)
                             {
                                 vital.mewsScore += 2;
