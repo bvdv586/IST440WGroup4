@@ -186,7 +186,11 @@ namespace IST440WGroup4.Pages.Dashboard
 
                 }
             }
-
+            
+            public void OnClick()
+                {
+                    
+                }
 
 
             public class ClinicianInfo

@@ -1,3 +1,4 @@
+using IST440WGroup4.Pages.Dashboard;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
@@ -48,7 +49,10 @@ namespace IST440WGroup4.Pages.Details
                         }
                     }
                 }
+                
             }
+
         }
+
     }
 }
