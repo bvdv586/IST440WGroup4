@@ -54,17 +54,17 @@ namespace IST440WGroup4.Pages.Dashboard
                         while (reader.Read())
                         {
                             PatientInfo patientInfo = new PatientInfo();
-                            patientInfo.PatientID = "" + reader.GetInt32(0);
-                            patientInfo.medicalRecordNumber = "" + reader.GetInt32(1);
+                            patientInfo.PatientID = reader.GetInt32(0);
+                            patientInfo.medicalRecordNumber = reader.GetInt32(1);
                             patientInfo.firstName = reader.GetString(2);
                             patientInfo.lastName = reader.GetString(3);
                             patientInfo.dateOfBirth = reader.GetString(4);
                             patientInfo.dateOfAdmission = reader.GetString(5);
                             patientInfo.location = reader.GetString(7);
-                            patientInfo.careTeam = "" + reader.GetInt32(8);
+                            patientInfo.careTeam = reader.GetInt32(8);
                             patientInfo.diagnosis = reader.GetString(9);
-                            patientInfo.admittingClinicianID = "" + reader.GetInt32(10);
-                            patientInfo.attendingClinicianID = "" + reader.GetInt32(11);
+                            patientInfo.admittingClinicianID = reader.GetInt32(10);
+                            patientInfo.attendingClinicianID = reader.GetInt32(11);
                             patientInfo.hospitalWing = reader.GetString(12);
                             patientInfo.roomNumber = reader.GetString(13);
                             patientInfo.respiratoryRPM = reader.GetInt32(14);
@@ -83,23 +83,23 @@ namespace IST440WGroup4.Pages.Dashboard
 
             foreach (var patient in listPatients)
             {
-                if (patient.respiratoryRPM <= 9)
+                if (patient.respiratoryRPM < 9)
                 {
                     patient.mewsScore += 2;
                 }
-                else if (patient.respiratoryRPM <= 14 && patient.respiratoryRPM > 9)
+                else if (patient.respiratoryRPM >= 9 && patient.respiratoryRPM <= 14)
                 {
                     patient.mewsScore += 0;
                 }
-                else if (patient.respiratoryRPM > 14 && patient.respiratoryRPM <= 20)
+                else if (patient.respiratoryRPM >= 15 && patient.respiratoryRPM <= 20)
                 {
                     patient.mewsScore += 1;
                 }
-                else if (patient.respiratoryRPM > 20 && patient.respiratoryRPM <= 29)
+                else if (patient.respiratoryRPM >= 21 && patient.respiratoryRPM <= 29)
                 {
                     patient.mewsScore += 2;
                 }
-                else if (patient.respiratoryRPM > 29)
+                else if (patient.respiratoryRPM >= 30)
                 {
                     patient.mewsScore += 3;
                 }
@@ -107,19 +107,19 @@ namespace IST440WGroup4.Pages.Dashboard
                 {
                     patient.mewsScore += 2;
                 }
-                else if (patient.heartRate > 40 && patient.heartRate < 50)
+                else if (patient.heartRate >= 41 && patient.heartRate <= 50)
                 {
                     patient.mewsScore += 1;
                 }
-                else if (patient.heartRate >= 50 && patient.heartRate < 100)
+                else if (patient.heartRate >= 51 && patient.heartRate <= 100)
                 {
                     patient.mewsScore += 0;
                 }
-                else if (patient.heartRate >= 100 && patient.heartRate < 110)
+                else if (patient.heartRate >= 101 && patient.heartRate <= 110)
                 {
                     patient.mewsScore += 1;
                 }
-                else if (patient.heartRate >= 110 && patient.heartRate < 130)
+                else if (patient.heartRate >= 111 && patient.heartRate <= 129)
                 {
                     patient.mewsScore += 2;
                 }
@@ -131,15 +131,15 @@ namespace IST440WGroup4.Pages.Dashboard
                 {
                     patient.mewsScore += 3;
                 }
-                else if (patient.systolicBP > 70 && patient.systolicBP <= 80)
+                else if (patient.systolicBP >= 71 && patient.systolicBP <= 80)
                 {
                     patient.mewsScore += 2;
                 }
-                else if (patient.systolicBP > 80 && patient.systolicBP <= 100)
+                else if (patient.systolicBP >= 81 && patient.systolicBP <= 100)
                 {
-                    patient.mewsScore += 2;
+                    patient.mewsScore += 1;
                 }
-                else if (patient.systolicBP < 100 && patient.systolicBP < 200)
+                else if (patient.systolicBP >= 101 && patient.systolicBP <= 199)
                 {
                     patient.mewsScore += 0;
                 }
@@ -147,23 +147,23 @@ namespace IST440WGroup4.Pages.Dashboard
                 {
                     patient.mewsScore += 2;
                 }
-                if (patient.apvuScore == "ALERT")
+                if (patient.apvuScore.Contains("ALERT"))
                 {
                     patient.mewsScore += 0;
                 }
-                else if (patient.apvuScore == "PAIN")
+                else if (patient.apvuScore.Contains("PAIN"))
                 {
                     patient.mewsScore += 2;
                 }
-                else if (patient.apvuScore == "VOICE")
+                else if (patient.apvuScore.Contains("VOICE"))
                 {
                     patient.mewsScore += 1;
                 }
-                else if (patient.apvuScore == "UNRESPONSIVE")
+                else if (patient.apvuScore.Contains("UNRESPONSIVE"))
                 {
                     patient.mewsScore += 3;
                 }
-                else if (patient.apvuScore == "AGITATED")
+                else if (patient.apvuScore.Contains("AGITATED"))
                 {
                     patient.mewsScore += 1;
                 }
@@ -187,11 +187,6 @@ namespace IST440WGroup4.Pages.Dashboard
                 }
             }
             
-            public void OnClick()
-                {
-                    
-                }
-
 
             public class ClinicianInfo
             {
@@ -206,17 +201,17 @@ namespace IST440WGroup4.Pages.Dashboard
 
             public class PatientInfo
             {
-                public String PatientID;
-                public String medicalRecordNumber;
+                public Int32 PatientID;
+                public Int32 medicalRecordNumber;
                 public String firstName;
                 public String lastName;
                 public String dateOfBirth;
                 public String dateOfAdmission;
                 public String location;
-                public String careTeam;
+                public Int32 careTeam;
                 public String diagnosis;
-                public String admittingClinicianID;
-                public String attendingClinicianID;
+                public Int32 admittingClinicianID;
+                public Int32 attendingClinicianID;
                 public String hospitalWing;
                 public String roomNumber;
                 public Int32 vitalID;

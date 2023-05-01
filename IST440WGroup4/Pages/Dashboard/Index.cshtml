@@ -4,7 +4,6 @@
     
 }
 
-
 <br />
 <h2> Dashboard </h2>
 <table>
@@ -43,7 +42,95 @@
                         <span style="color: red"> Urgent</span>
                     }
                 </td>
-                <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Index" /></form></td>
+                @if (patient.medicalRecordNumber == 1)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Brian" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 2)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Jeffrey" /></form></td>
+                }
+                else if(patient.medicalRecordNumber == 3)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Anthony" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 4)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Myra" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 5)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Jason" /></form></td>
+                }
+                else if(patient.medicalRecordNumber == 6)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Nicky" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 7)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Guy" /></form></td>
+                }
+                else if(patient.medicalRecordNumber == 8)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Sara" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 9)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Amy" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 10)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Christina" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 11)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Betty" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 12)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Milly" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 13)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Caemella" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 14)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Vito" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 15)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/BrianD" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 16)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/John" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 17)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Joseph" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 18)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Teresa" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 19)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Bart" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 20)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/JohnJA" /></form></td>
+                }
+                else if (patient.medicalRecordNumber == 21)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/BrianN" /></form></td>
+                }
+                else if(patient.medicalRecordNumber == 22)
+                {
+                    <td><form><input id="details" class="btn-primary" type="submit" value="Details" asp-page="/Details/Ken" /></form></td>
+                }
+
             </tr>
         }
 
