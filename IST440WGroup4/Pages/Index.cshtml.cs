@@ -41,6 +41,11 @@ namespace IST440WGroup4.Pages
         public async Task<IActionResult> OnPostAsync()
         {
 
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=GPHDatabase;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
